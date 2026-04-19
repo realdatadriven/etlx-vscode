@@ -1,0 +1,63 @@
+{
+  "name": "etlx",
+  "displayName": "ETLX",
+  "description": "ETLX (.xmd/.etlxmd/.eltx) support + interactive execution",
+  "version": "0.1.0",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Programming Languages", "Notebooks", "Data Science"],
+  "activationEvents": ["onLanguage:etlx", "workspaceContains:*.etlx"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [{
+      "id": "etlx",
+      "aliases": ["ETLX", "etlx", "ETLX Markdown"],
+      "extensions": [".xmd", ".etlxmd", ".eltx"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "etlx",
+      "scopeName": "source.etlx",
+      "path": "./syntaxes/etlx.tmLanguage.json"
+    }],
+    "commands": [
+      { "command": "etlx.runPipeline", "title": "ETLX: Run Pipeline" },
+      { "command": "etlx.runSection", "title": "ETLX: Run Section" },
+      { "command": "etlx.toggleActive", "title": "ETLX: Toggle Active" }
+    ],
+    "menus": {
+      "editor/title": [{
+        "command": "etlx.runPipeline",
+        "when": "resourceLangId == etlx",
+        "group": "navigation"
+      }]
+    },
+    "configuration": {
+      "title": "ETLX",
+      "properties": {
+        "etlx.binaryPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to etlx-bin (leave empty to use auto-downloaded version)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.19.17",
+    "@types/vscode": "^1.116.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.39.3",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1"
+  }
+}

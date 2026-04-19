@@ -1,0 +1,16 @@
+{
+  "scopeName": "source.etlx",
+  "patterns": [
+    { "include": "text.markdown" },
+    {
+      "match": "(?i)\\b(active|runs_as|name|description):",
+      "name": "keyword.etlx.yaml"
+    },
+    {
+      "begin": "```yaml",
+      "end": "```",
+      "name": "meta.embedded.block.yaml.etlx",
+      "patterns": [{ "include": "source.yaml" }]
+    }
+  ]
+}
