@@ -1,16 +1,55 @@
 {
   "scopeName": "source.etlx",
+  "name": "ETLX Markdown",
   "patterns": [
-    { "include": "text.markdown" },
     {
-      "match": "(?i)\\b(active|runs_as|name|description):",
-      "name": "keyword.etlx.yaml"
+      "include": "text.markdown"
     },
     {
-      "begin": "```yaml",
-      "end": "```",
+      "comment": "ETLX-specific YAML keys inside any YAML block",
+      "begin": "(```yaml\\s*$)",
+      "end": "(^```$)",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.markdown" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.markdown" }
+      },
       "name": "meta.embedded.block.yaml.etlx",
-      "patterns": [{ "include": "source.yaml" }]
+      "patterns": [
+        {
+          "include": "source.yaml"
+        },
+        {
+          "match": "\\b(active|runs_as|name|description|depends_on|schedule|timeout|retries|priority|input|output|variables|environment|tags)\\b:",
+          "name": "keyword.control.etlx.yaml"
+        },
+        {
+          "match": "\\b(true|false|null)\\b",
+          "name": "constant.language.etlx.yaml"
+        },
+        {
+          "match": "(?i)\\b(ETLX|pipeline|section|subsection)\\b",
+          "name": "entity.name.type.etlx"
+        }
+      ]
+    },
+    {
+      "comment": "Highlight ETLX keywords in inline YAML frontmatter or metadata",
+      "match": "(?i)^(active|runs_as|name|description|depends_on|schedule|timeout|retries|priority):",
+      "name": "keyword.control.etlx.yaml"
+    },
+    {
+      "comment": "ETLX section headers get extra emphasis",
+      "match": "^(#{1,3})\\s+(.+?)(?:\\s*#*)?$",
+      "name": "markup.heading.etlx",
+      "captures": {
+        "1": { "name": "punctuation.definition.heading.markdown" },
+        "2": { "name": "entity.name.section.etlx" }
+      }
     }
-  ]
+  ],
+  "repository": {},
+  "fileTypes": ["xmd", "etlxmd", "eltx"],
+  "uuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab"
 }

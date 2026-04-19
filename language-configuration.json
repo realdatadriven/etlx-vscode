@@ -1,0 +1,40 @@
+{
+  "comments": {
+    "blockComment": ["<!--", "-->"]
+  },
+  "brackets": [
+    ["{", "}"],
+    ["[", "]"],
+    ["(", ")"],
+    ["<", ">"]
+  ],
+  "autoClosingPairs": [
+    ["{", "}"],
+    ["[", "]"],
+    ["(", ")"],
+    ["<", ">"],
+    ["'", "'"],
+    ["\"", "\""],
+    ["`", "`"]
+  ],
+  "surroundingPairs": [
+    ["{", "}"],
+    ["[", "]"],
+    ["(", ")"],
+    ["<", ">"],
+    ["'", "'"],
+    ["\"", "\""],
+    ["`", "`"]
+  ],
+  "folding": {
+    "markers": {
+      "start": "^\\s*#\\s*(?:region\\b|pragma\\s+region\\b)",
+      "end": "^\\s*#\\s*(?:endregion\\b|pragma\\s+endregion\\b)"
+    }
+  },
+  "indentationRules": {
+    "increaseIndentPattern": "^\\s*\\b(?!else\\b)(?:if|for|while|with|def|class|try|except|finally|elif|else)\\b.*:\\s*$|^\\s*#\\s*\\b(?:section|subsection)\\b",
+    "decreaseIndentPattern": "^\\s*(?:else|elif|except|finally)\\b.*:\\s*$|^\\s*\\b(?!else\\b)(?:if|for|while|with|def|class|try|except|finally|elif|else)\\b.*:\\s*$|^\\s*\\b(?:pass|return|break|continue)\\b"
+  },
+  "wordPattern": "\\w+"
+}

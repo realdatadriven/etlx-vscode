@@ -1,71 +1,126 @@
-# etlx-vscode README
+# ETLX - VS Code Extension
 
-This is the README for your extension "etlx-vscode". After writing up a brief description, we recommend including the following sections.
+**Full support for ETLX Markdown pipelines** — syntax highlighting, interactive execution, and seamless integration with `etlx-bin`.
+
+![ETLX Logo](https://realdatadriven.github.io/etlxdocs/assets/etlx-logo.png)
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- **Language Support** for `.xmd`, `.etlxmd`, and `.eltx` files
+- **Full Markdown + ETLX syntax highlighting**
+  - Normal Markdown works perfectly
+  - Special highlighting for `active:`, `runs_as:`, `name:`, `description:`, `depends_on:`, etc.
+- **Interactive CodeLenses**
+  - `▶ Run` button on every `# Section` and `## Subsection`
+  - `🔄 Toggle Active` button on every section
+- **Global Run Button** in the editor title bar (`ETLX: Run Entire Pipeline`)
+- **Automatic binary management**
+  - Downloads the latest `etlx-bin` on first use
+  - Stores it safely in global storage
+  - Fully configurable via settings (`etlx.binaryPath`)
+- **One-click execution** — toggles `active: true` and runs the pipeline/section
 
-For example if there is an image subfolder under your extension project workspace:
+## Installation & Usage
 
-\!\[feature X\]\(images/feature-x.png\)
+1. Open VS Code
+2. Press `Ctrl+Shift+X` and search for **ETLX** (or install from `.vsix` during development)
+3. Open any `.xmd`, `.etlxmd`, or `.eltx` file
+4. Use the **▶ Run** buttons on sections or the global play button in the title bar
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+### Configuration
 
-## Requirements
+Go to **Settings** (`Ctrl+,`) and search for "ETLX":
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- **`etlx.binaryPath`**  
+  Full path to a custom `etlx-bin` executable. Leave empty to use the auto-downloaded version.
 
-## Extension Settings
+## Development
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+### Prerequisites
+- Node.js
+- VS Code
 
-For example:
+### Setup
 
-This extension contributes the following settings:
+```bash
+git clone <your-repo>
+cd etlx-vscode
+npm install
+```
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+### Build & Run
 
-## Known Issues
+- **Compile**: `npm run compile`
+- **Watch mode**: `npm run watch`
+- **Launch**: Press `F5` (or Run → Start Debugging)
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+### Project Structure
 
-## Release Notes
+```
+etlx-vscode/
+├── package.json
+├── README.md
+├── language-configuration.json
+├── syntaxes/
+│   └── etlx.tmLanguage.json
+├── src/
+│   └── extension.ts
+├── .vscode/
+│   └── launch.json
+└── out/               (generated)
+```
 
-Users appreciate release notes as you update your extension.
+## How it works
 
-### 1.0.0
+- When you click **▶ Run** on a section:
+  1. Automatically sets `active: true` in the nearest YAML block under that header
+  2. Executes `etlx-bin --config <current-file>`
 
-Initial release of ...
+- The extension inherits **all default Markdown behavior** while adding ETLX-specific features.
 
-### 1.0.1
+## Roadmap
 
-Fixed issue #.
+- Better YAML parsing (using `js-yaml`)
+- Support for running subsections independently
+- Output panel with structured logs
+- Auto-detect latest binary from GitHub Releases
+- Theme-specific colors for ETLX elements
 
-### 1.1.0
+## License
 
-Added features X, Y, and Z.
+MIT
 
 ---
 
-## Following extension guidelines
+**Made for the [ETLX Project](https://realdatadriven.github.io/etlxdocs/)**
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+Feedback and contributions welcome!
+```
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+---
 
-## Working with Markdown
+### Final Folder Structure (Summary)
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+Now your extension should look like this:
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+```
+etlx-vscode/
+├── package.json
+├── README.md
+├── language-configuration.json
+├── syntaxes/
+│   └── etlx.tmLanguage.json
+├── src/
+│   └── extension.ts
+├── .vscode/
+│   └── launch.json
+├── tsconfig.json
+└── out/
+```
 
-## For more information
+**Ready to go!**
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Just:
+1. Create the `.vscode/launch.json` with the content above.
+2. Create/replace `README.md` with the content above.
+3. Open the folder in VS Code → Press **F5**.
