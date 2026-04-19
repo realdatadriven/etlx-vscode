@@ -95,7 +95,6 @@ MIT
 **Made for the [ETLX Project](https://realdatadriven.github.io/etlxdocs/)**
 
 Feedback and contributions welcome!
-```
 
 ---
 
@@ -117,10 +116,3 @@ etlx-vscode/
 ├── tsconfig.json
 └── out/
 ```
-
-**Ready to go!**
-
-Just:
-1. Create the `.vscode/launch.json` with the content above.
-2. Create/replace `README.md` with the content above.
-3. Open the folder in VS Code → Press **F5**.
