@@ -3,6 +3,7 @@
   "displayName": "ETLX",
   "description": "ETLX (.xmd/.etlxmd/.eltx) support + interactive execution",
   "version": "0.1.0",
+  "publisher": "realdatadriven",
   "engines": { "vscode": "^1.85.0" },
   "categories": ["Programming Languages", "Notebooks", "Data Science"],
   "activationEvents": ["workspaceContains:*.etlx"],
